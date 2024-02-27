@@ -1,1 +1,16 @@
-<p>card works!</p>
+<div class="card">
+    
+    <div class="card_title">
+        <h3> {{ name }}</h3>
+    </div>
+    <div class="card_body">
+        <img src="" alt="pokemon">
+    </div>
+    <div class="card_stats">
+        <span class="card_stats_type"
+         *ngFor="let type of attributesTypes">
+            {{ type }}
+        </span>
+    </div>
+
+</div>
