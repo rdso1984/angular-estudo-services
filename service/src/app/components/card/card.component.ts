@@ -1,16 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PokemonServiceService } from '../../services/pokemon-service.service';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
 
-export class CardComponent {
+export class CardComponent implements OnInit{
 
   name:string = "CHARIZARD"
-  attributesTypes:string[] = ['FIRE', 'ROCK']
+  attributesTypes:string[] = ['FIRE', 'ROCK', 'WATER']
 
+  //Injetando um service no construtor
+  constructor(private service:PokemonServiceService){ }
+
+  ngOnInit(): void {
+    this.service.getPokemon("nome")
+  }
+
+  
 }
