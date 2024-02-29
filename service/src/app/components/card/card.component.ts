@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PokemonServiceService } from '../../services/pokemon-service.service';
+import { PokemonData } from '../../models/pokemonData';
 
 @Component({
   selector: 'app-card',
@@ -11,17 +12,26 @@ import { PokemonServiceService } from '../../services/pokemon-service.service';
 })
 
 export class CardComponent implements OnInit{
-
-  name:string = "CHARIZARD"
-  attributesTypes:string[] = ['FIRE', 'ROCK', 'WATER']
-
+  pokemon?: PokemonData
+  
   //Injetando um service no construtor
   constructor(private service:PokemonServiceService){ }
 
   ngOnInit(): void {
-    this.service.getPokemon("charizard").subscribe(
+    this.getPokemon("pikachu")
+  }
+
+  getPokemon(searchName:string){
+    this.service.getPokemon(searchName).subscribe(
       {
-        next: (res) => console.log(res),
+        next: (res) => {
+          this.pokemon = {
+            id: res.id,
+            name: res.name,
+            sprites: res.sprites,
+            types: res.types
+          }
+        },
         error: (err) => console.log(err)
       }
     )
